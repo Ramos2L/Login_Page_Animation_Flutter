@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_animations/simple_animations.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({ Key? key }) : super(key: key);
@@ -58,14 +59,24 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(  
-                      child: Container(  
-                        margin: const EdgeInsets.only(top: 50),
-                        child: const Center(  
-                          child: Text("Login", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
-                        ),
-                      ),
+                    Positioned( 
+                      child: PlayAnimation<double>(
+                        tween: Tween(begin: 0.0, end: 400.0),
+                        duration: const Duration(seconds: 2),
+                        curve: Curves.easeOut,
+                        builder: (context, child, value) {
+                          return Container(
+                            width: value,
+                            height: value,
+                            margin: const EdgeInsets.only(top: 50),
+                            child: const Center(  
+                              child: Text("Login", style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),),
+                            ),
+                          );
+                        },
+                      )
                     ),
+                    
                   ]
                 ),
             ),
@@ -119,23 +130,32 @@ class HomePage extends StatelessWidget {
                   const SizedBox( 
                     height: 20,
                   ),
-                  Container(
-                    height: 50,
-                    decoration: BoxDecoration(  
-                      borderRadius: BorderRadius.circular(10),
-                      gradient: const LinearGradient(  
-                        colors: [                          
-                          Color.fromRGBO(143, 148, 251, 1), 
-                          Color.fromRGBO(143, 148, 251, .6), 
-                        ]
-                      )
-                    ),
-                    child: const Center(  
-                      child: Text(  
-                        "Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)
-                      ),
-                    ),
+                  PlayAnimation<double>(
+                    tween: Tween(begin: 50.0, end: 200.0), // specify tween
+                    duration: const Duration(seconds: 2), // set a duration
+                    builder: (context, child, value) {
+                      return Container(
+                        width: value,
+                        height: 50,
+                        decoration: BoxDecoration(  
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: const LinearGradient(  
+                            colors: [                          
+                              Color.fromRGBO(143, 148, 251, 1), 
+                              Color.fromRGBO(143, 148, 251, .6), 
+                            ]
+                          )
+                          ),
+                          child: const Center(  
+                            child: Text(  
+                              "Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)
+                            ),
+                          ),
+                  
+                      );
+                    },
                   ),
+                  
                   const SizedBox(
                     height: 70,
                   ),
